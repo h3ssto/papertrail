@@ -28,7 +28,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Requires a [gutenscrape](https://github.com/TUBS-ISF/gutenscrape) installation available on the Python path.
+Requires a [gutenscrape](https://github.com/h3ssto/gutenscrape) installation available on the Python path.
 
 ### Frontend
 
