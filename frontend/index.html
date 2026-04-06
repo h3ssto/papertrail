@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papertrail</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ── Home view ──────────────────────────────────────────────── -->
+  <div id="home-view">
+    <div class="home-container">
+      <h1 class="logo">Paper<span>trail</span></h1>
+      <p class="subtitle">Academic Paper Investigation Board</p>
+
+      <form id="new-case-form" class="new-case-form" autocomplete="off">
+        <input id="case-name-input" type="text" placeholder="New case name…" required />
+        <button type="submit" class="btn">Open Case</button>
+      </form>
+
+      <div id="cases-list" class="cases-list"></div>
+    </div>
+  </div>
+
+  <!-- ── Case view ──────────────────────────────────────────────── -->
+  <div id="case-view" style="display:none">
+
+    <!-- Toolbar -->
+    <div id="toolbar">
+      <div class="toolbar-left">
+        <button id="back-btn" class="btn secondary">← Cases</button>
+        <span id="case-title" class="case-title"></span>
+      </div>
+      <div class="toolbar-center">
+        <div id="paper-search-wrap" class="toolbar-search-wrap">
+          <input id="paper-search-input" type="text" class="toolbar-search-input" placeholder="Search &amp; download paper…" autocomplete="off" />
+          <div id="paper-search-dropdown" class="toolbar-search-dropdown" style="display:none"></div>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <button id="upload-btn" class="btn" title="Upload one or more PDFs">Upload Paper(s)</button>
+        <button id="upload-bib-btn" class="btn secondary" title="Upload a .bib file">+ BibTeX</button>
+        <button id="add-postit-btn" class="btn secondary">+ Post-it</button>
+        <button id="draw-conn-btn" class="btn secondary">Connect</button>
+        <button id="match-bibtex-btn" class="btn secondary" title="Sync BibTeX metadata for all papers">⟳ Sync BibTeX</button>
+        <button id="order-dag-btn" class="btn secondary" title="Auto-layout papers as a DAG (top → bottom)">⬡ Order</button>
+        <span id="draw-hint" class="draw-hint" style="display:none">Click source → click target &nbsp;(Esc cancels)</span>
+      </div>
+    </div>
+
+    <!-- Canvas + Viewer row -->
+    <div id="content-row">
+
+      <!-- Canvas -->
+      <div id="canvas-wrap">
+        <svg id="canvas"></svg>
+      </div>
+
+      <!-- Viewer resize handle (between canvas and viewer) -->
+      <div id="viewer-resize-handle" title="Drag to resize viewer"></div>
+
+      <!-- Viewer panel (right side) -->
+      <div id="viewer-panel">
+        <!-- Collapse strip -->
+        <div id="viewer-collapse-strip" title="Toggle viewer">
+          <button id="viewer-toggle-btn" title="Collapse viewer">‹</button>
+        </div>
+        <!-- Body -->
+        <div id="viewer-body">
+          <div id="viewer-tab-bar">
+            <div id="viewer-tabs"></div>
+          </div>
+          <div id="viewer-content"></div>
+        </div>
+      </div>
+
+    </div><!-- end #content-row -->
+
+    <!-- Connection editor (floating) -->
+    <div id="conn-editor" style="display:none">
+      <div class="panel-header">
+        <span>Connection</span>
+        <button id="conn-editor-close" class="icon-btn">×</button>
+      </div>
+      <label class="field-label">
+        Color
+        <input type="color" id="conn-color" value="#e63946" />
+      </label>
+      <label class="field-label">
+        Thickness
+        <input type="range" id="conn-thickness" min="1" max="12" step="0.5" value="2" />
+        <span id="conn-thickness-val">2</span>px
+      </label>
+      <label class="field-label">
+        Annotation
+        <input type="text" id="conn-annotation" placeholder="Note…" />
+      </label>
+      <button id="conn-delete-btn" class="btn danger" style="margin-top:0.5rem">Delete</button>
+    </div>
+
+  </div><!-- end #case-view -->
+
+  <!-- Hidden file inputs -->
+  <input type="file" id="file-input"     accept=".pdf" multiple style="display:none" />
+  <input type="file" id="bib-file-input" accept=".bib" multiple style="display:none" />
+
+  <!-- Toast notifications -->
+  <div id="toast-container"></div>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
